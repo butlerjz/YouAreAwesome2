@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var message = ""
     @State private var imageName = ""
     @State private var imageNumber = 0
+    @State private var messageCounter = 0
     
     var body: some View {
         
@@ -18,23 +19,32 @@ struct ContentView: View {
             
             Spacer()
             
+            Text(message)
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.5)
+                .frame(height: 100)
+                .animation(.easeInOut(duration: 0.15), value: message)
             Image(imageName)
                 .resizable()
                 .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 30))
                 .shadow(radius: 30)
-            Text(message)
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-                .foregroundStyle(.red)
+                .animation(.default, value: imageName)
             
             Spacer()
             
             Button("Show Message") {
-                let message1 = "You are Awesome!"
-                let message2 = "You are Great!"
+                let messages = ["You are Awesome!", "You're An Amazing Programmer!", "You are Great!", "You Make Me Smile!"]
                 
-                message = (message == message1 ? message2 : message1)
+                message = messages[messageCounter]
+                messageCounter += 1
+                if messageCounter > messages.count - 1 {
+                    messageCounter = 0
+                }
+                
                 
                 imageName = "image\(imageNumber)"
                 imageNumber += 1

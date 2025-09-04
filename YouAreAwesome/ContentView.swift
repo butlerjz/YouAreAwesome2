@@ -10,8 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @State private var message = ""
     @State private var imageName = ""
-    @State private var imageNumber = 0
-    @State private var messageCounter = 0
     
     var body: some View {
         
@@ -39,19 +37,9 @@ struct ContentView: View {
             Button("Show Message") {
                 let messages = ["You are Awesome!", "You're An Amazing Programmer!", "You are Great!", "You Make Me Smile!"]
                 
-                message = messages[messageCounter]
-                messageCounter += 1
-                if messageCounter > messages.count - 1 {
-                    messageCounter = 0
-                }
+                message = messages[Int.random(in: 0...messages.count - 1)]
                 
-                
-                imageName = "image\(imageNumber)"
-                imageNumber += 1
-                if imageNumber > 9 {
-                    imageNumber = 0
-                }
-                
+                imageName = "image\(Int.random(in: 0...9))"
                 
             }
             .buttonStyle(.borderedProminent)
